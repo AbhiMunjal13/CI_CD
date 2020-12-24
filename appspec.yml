@@ -2,15 +2,18 @@ version: 0.0
 os: linux
 
 files:
-  - source: /index.html
-    destination: /var/www/html
+  - source: ./
+    destination: /home/ec2-user/html
     overwrite: yes
-
+perrmissions:
+  - object: /home/ec2-user/html
+    owner: ec2-user
+    group: ec2-user
 hooks:
   BeforeInstall:
     - location: scripts/changepermission.sh
       timeout: 3600
-      runas: root
+      runas: ec2-user
   ApplicationStart:
     - location: scripts/install_dependencies.sh
       timeout: 3600
